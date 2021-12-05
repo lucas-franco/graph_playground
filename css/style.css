@@ -1,0 +1,139 @@
+body {
+    margin: 0;
+    font-family: Helvetica, Arial;
+}
+
+a {
+    text-decoration: none;
+    color: #1f77b4;
+}
+
+p {
+    font-size: 16px;
+    color: #333;
+    line-height: 18px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+h1 {
+    margin-top: 20px;
+    font-size: 36px;
+    font-weight: 300;
+    color: #444;
+    text-align: center;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+b {
+    color: #d62828;
+}
+
+#container {
+    margin: auto;
+}
+
+#instructions {
+    margin-top: 20px;
+    width: 700px;
+    margin: auto;
+}
+
+button {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-top: 10px;
+    color: #333;
+}
+
+button:hover {
+    background-color: #ddd;
+}
+
+button:active {
+    background-color: #ccc;
+}
+
+#svg-wrap {
+    margin-top: 10px;
+}
+
+#signature {
+    text-align: center;
+}
+
+
+/*graph styling*/
+
+svg {
+    cursor: crosshair;
+    display: block;
+    margin: 0;
+    border: 1px solid #eee;
+}
+
+.edge {
+    stroke: #888;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    cursor: default;
+}
+
+.edge:hover,
+.dragLine {
+    stroke: #333;
+    stroke-width: 3px;
+}
+
+.vertex {
+    cursor: pointer;
+}
+
+.vertex-text {
+    fill: white;
+    font-size: 14px;
+    paint-order: stroke;
+    stroke: #000000;
+    stroke-width: 1px;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    font-weight: 800;
+}
+
+.vertex:hover {
+    stroke: #333;
+    opacity: 0.8;
+}
+
+.dragLine.hidden {
+    stroke-width: 0;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.btn-custom {
+    background-color: white;
+    border-width: 2;
+    border-color: black;
+}
+
+#properties.row>* {
+    width: auto!important;
+}
+
+.dropdown-menu {
+    padding-left: 8px!important;
+    padding-right: 8px!important;
+}
