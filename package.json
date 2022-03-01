@@ -52,12 +52,14 @@
         "rimraf": "^3.0.2"
     },
     "dependencies": {
-        "d3": "5.7.0",
-        "mathjax": "2.7.0",
-        "underscore": "^1.13.1",
         "bootstrap": "^5.1.3",
-        "jquery": "3.6.0",
+        "d3": "5.7.0",
         "graphml-js": "^0.4.0",
+        "html-colors": "^0.0.6",
+        "jquery": "3.6.0",
+        "mathjax": "2.7.0",
+        "pleasejs": "^0.4.2",
+        "underscore": "^1.13.1",
         "xml-js": "1.6.11"
     }
 }

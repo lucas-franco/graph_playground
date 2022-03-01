@@ -1,4 +1,6 @@
 import * as d3 from "d3";
+import Please from "pleasejs";
+const htmlColors = require('html-colors');
 
 var nodes = [];
 var links = [];
@@ -27,7 +29,14 @@ var svg = d3.select("#svg-wrap")
 
 
 //array of colors for nodes
-var colors = d3.schemeCategory10;
+
+
+var colors = d3.schemeCategory10.concat(Please.make_color({
+    colors_returned: 90,
+    value: 0.7,
+    saturation: 0.8,
+    golden: false,
+}).map((e) => !d3.schemeCategory10.includes(e)));
 
 //the animation line when adding edge b/w two vertices
 var dragLine = svg.append("path")
@@ -80,6 +89,10 @@ function tick() {
 
 }
 
+function getColor(value) {
+    return colors[value];
+}
+
 //updates the graph by updating links, nodes and binding them with DOM
 //interface is defined through several events
 function restart() {
@@ -97,9 +110,9 @@ function restart() {
         })
         .on("contextmenu", removeEdge);
 
-    ed.append("title").text(function(d) {
-        return "v" + d.source.id + "-v" + d.target.id;
-    });
+    // ed.append("title").text(function(d) {
+    //     return "v" + d.source.id + "-v" + d.target.id;
+    // });
 
     edges = ed.merge(edges);
 
@@ -119,51 +132,38 @@ function restart() {
             d3.event.stopPropagation();
         });
 
-
-
     g.append("circle")
         .attr("r", rad)
         .style("fill", function(d, i) {
-            return colors[d.id % 10];
+            // console.log("fill", { d, color: colors[d.color % 10] });
+            return getColor(d.color);
         })
         .on("mousedown", beginDragLine)
         .on("mouseup", endDragLine)
-        .on("mouseover", function(d) {
-            // window.graph.showVertexInfo(d);
-        })
-        .on("mouseout", function(d) {
-            // window.graph.hideVertexInfo();
-        })
-        .on("contextmenu", removeNode)
-        .append("title")
+        .on("contextmenu", removeNode);
+
+    g.append("title")
         .text(function(d) {
             return "v" + d.id;
         });
-    div.on("mouseout", function(d) {
-        console.log("show MOUSEOUT", d)
-            // window.graph.hideVertexInfo();
-    })
-
-    // g.append("text")
-    //     .attr("x", -8)
-    //     .attr("y", 5)
-    //     .attr("class", "vertex-text")
-    //     .on("mousedown", beginDragLine)
-    //     .on("mouseup", endDragLine)
-    //     .on("contextmenu", removeNode)
-    //     .text(function(d) {
-    //         return "v" + d.id;
-    //     });
 
     g.selectAll(".vertex")
 
     vertices = g.merge(vertices);
+    vertices.style("fill", function(d, i) {
+        // console.log("fill2", { d, color: colors[d.color % 10] });
+        return getColor(d.color);
+    });
 
     force.nodes(nodes);
+    // console.log("restart/6,", { links, nodes });
     force.force("link").links(links);
+    // console.log("restart/7");
     force.alpha(0.8).restart();
 
     window.graph.refresh(nodes, links);
+    // console.log("restart/final", { nodes, links });
+
 }
 
 // CORE STUFF TO DRAW GRAPH ENDS //
@@ -319,9 +319,16 @@ function keyup() {
 }
 
 function mapVertexToNode(vertex) {
-    return {
-        id: vertex["id"]
-    }
+    currentNode = nodes.find((e) => e.id == vertex["id"]);
+    return currentNode != null ? {
+        ...currentNode,
+        degree: vertex["degree"],
+        color: vertex["color"],
+    } : {
+        id: vertex["id"],
+        degree: vertex["degree"],
+        color: vertex["color"],
+    };
 }
 
 function mapEdgeToLink(edge) {
@@ -331,12 +338,41 @@ function mapEdgeToLink(edge) {
     }
 }
 
+function setColor() {
+    vertices.selectAll("circle").style("fill", function(d) {
+        var vertex = window.graph.graphVertices.find((e) => e.id == d.id);
+        return getColor(vertex.color);
+    });
+}
+
+function restartGraph() {
+    setColor();
+}
+
 function start() {
-    window.graph.restartGraph = () => start();
-    nodes = window.graph.graphVertices.map((it) => mapVertexToNode(it));
-    links = window.graph.graphEdges.map((it) => mapEdgeToLink(it));
-    lastNodeId = nodes.map((it) => it.id).reduce((a, b) => Math.max(a, b));;
-    console.log("start", { nodes, links });
+    console.log("colors", { colors });
+    if (window.graph.graphVertices != null) {
+        var tempVertices = window.graph.graphVertices;
+        var tempEdges = window.graph.graphEdges;
+        // if (nodes.length > 0) {
+        //     nodes.splice(0);
+        // }
+        // if (links.length > 0) {
+        //     links.splice(0);
+        // }
+        // lastNodeId = 0;
+        // restart();
+
+        // console.log("start/1", { vertices: tempVertices, edges: tempEdges });
+        window.graph.restartGraph = () => restartGraph();
+        // tempVertices.forEach((it, index) => {
+
+        // });
+        nodes = tempVertices.map((it) => mapVertexToNode(it));
+        links = tempEdges.map((it) => mapEdgeToLink(it));
+        lastNodeId = nodes.map((it) => it.id).reduce((a, b) => Math.max(a, b));;
+        console.log("start", { nodes, links });
+    }
     restart();
 }
 

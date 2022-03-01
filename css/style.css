@@ -137,3 +137,25 @@ svg {
     padding-left: 8px!important;
     padding-right: 8px!important;
 }
+
+.background-color {
+    /* background-color: #212121 !important; */
+}
+
+.test {
+    text-align: left;
+}
+
+.graph-output {}
+
+.margin-top {
+    margin-top: 16px;
+}
+
+.output-card-display {
+    display: none!important;
+}
+
+.card-bg-info {
+    background-color: #daecf9!important;
+}
