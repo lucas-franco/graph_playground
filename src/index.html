@@ -37,6 +37,12 @@
                             </label>
                         </div>
                         <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="property_trivial">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Trivial
+                            </label>
+                        </div>
+                        <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="property_complete-graph">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Grafo completo
@@ -63,9 +69,30 @@
                         </div>
                         <h6 class="dropdown-header">Coloração/multipartição</h6>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_coloring">
+                            <input class="form-check-input" type="checkbox" value="" id="property_bipartite">
                             <label class="form-check-label" for="flexCheckDefault">
-                                Colorir
+                                Bipartido
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="property_chromatic-color">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Número crômatico
+                            </label>
+                        </div>
+
+                        <h6 class="dropdown-header">Ciclos</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="property_cycles">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Número de ciclos
+                            </label>
+                        </div>
+                        <h6 class="dropdown-header">Árvores</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="property_trees">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Árvores
                             </label>
                         </div>
 
@@ -86,21 +113,30 @@
                     </div>
                 </div>
                 <div class="card text-dark bg-light mb-3 margin-top output-card-display" id="output-degree-card">
-                    <!-- <div class="card-header">Conjuntos</div> -->
                     <div class="card-body">
                         <div id="output-degree">
                         </div>
                     </div>
                 </div>
                 <div class="card text-dark bg-light mb-3 margin-top output-card-display" id="output-coloring-card">
-                    <!-- <div class="card-header">Conjuntos</div> -->
                     <div class="card-body">
                         <div id="output-coloring">
                         </div>
                     </div>
                 </div>
+                <div class="card text-dark bg-light mb-3 margin-top output-card-display" id="output-cycles-card">
+                    <div class="card-body">
+                        <div id="output-cycles">
+                        </div>
+                    </div>
+                </div>
+                <div class="card text-dark bg-light mb-3 margin-top output-card-display" id="output-trees-card">
+                    <div class="card-body">
+                        <div id="output-trees">
+                        </div>
+                    </div>
+                </div>
                 <div class="card text-dark bg-light mb-3 margin-top output-card-display" id="output-conectivity-card">
-                    <!-- <div class="card-header">Conjuntos</div> -->
                     <div class="card-body">
                         <div id="output-conectivity">
                         </div>

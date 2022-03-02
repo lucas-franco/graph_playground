@@ -33,6 +33,18 @@ function togleProperty(event, propertyType) {
 }
 
 
+document.getElementById('property_groups')
+    .addEventListener('change', function(event) {
+        togleProperty(event, PropertyType.GROUPS);
+    });
+document.getElementById('property_trivial')
+    .addEventListener('change', function(event) {
+        togleProperty(event, PropertyType.TRIVIAL);
+    });
+document.getElementById('property_complete-graph')
+    .addEventListener('change', function(event) {
+        togleProperty(event, PropertyType.COMPLETE_GRAPH);
+    });
 
 document.getElementById('property_min-degree')
     .addEventListener('change', function(event) {
@@ -44,34 +56,37 @@ document.getElementById('property_max-degree')
         togleProperty(event, PropertyType.MAX_DEGREE);
     });
 
-document.getElementById('property_groups')
-    .addEventListener('change', function(event) {
-        togleProperty(event, PropertyType.GROUPS);
-    });
 document.getElementById('property_regular-graph')
     .addEventListener('change', function(event) {
         togleProperty(event, PropertyType.REGULAR_GRAPH);
     });
-// document.getElementById('property_chromatic-color')
+document.getElementById('property_chromatic-color')
+    .addEventListener('change', function(event) {
+        togleProperty(event, PropertyType.CHROMATIC_COLOR);
+    });
+document.getElementById('property_bipartite')
+    .addEventListener('change', function(event) {
+        togleProperty(event, PropertyType.BIPARTITE);
+    });
+
+// document.getElementById('property_coloring')
 //     .addEventListener('change', function(event) {
-//         togleProperty(event, PropertyType.CHROMATIC_COLOR);
-//     });
-// document.getElementById('property_bipartite')
-//     .addEventListener('change', function(event) {
-//         togleProperty(event, PropertyType.BIPARTITE);
+//         togleProperty(event, PropertyType.COLORING);
 //     });
 
-document.getElementById('property_coloring')
+document.getElementById('property_cycles')
     .addEventListener('change', function(event) {
-        togleProperty(event, PropertyType.COLORING);
+        togleProperty(event, PropertyType.CYCLES);
     });
+
+document.getElementById('property_trees')
+    .addEventListener('change', function(event) {
+        togleProperty(event, PropertyType.TREES);
+    });
+
 document.getElementById('property_components')
     .addEventListener('change', function(event) {
         togleProperty(event, PropertyType.COMPONENTS);
-    });
-document.getElementById('property_complete-graph')
-    .addEventListener('change', function(event) {
-        togleProperty(event, PropertyType.COMPLETE_GRAPH);
     });
 
 document.getElementById("export")

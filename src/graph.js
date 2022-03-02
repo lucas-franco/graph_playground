@@ -38,14 +38,17 @@ export const TestType = {
 
 export const PropertyType = {
     GROUPS: "GROUPS",
+    TRIVIAL: "TRIVIAL",
+    COMPLETE_GRAPH: "COMPLETE_GRAPH",
     MIN_DEGREE: "MIN_DEGREE",
     MAX_DEGREE: "MAX_DEGREE",
-    CHROMATIC_COLOR: "CHROMATIC_COLOR",
     REGULAR_GRAPH: "REGULAR_GRAPH",
     BIPARTITE: "BIPARTITE",
+    CHROMATIC_COLOR: "CHROMATIC_COLOR",
     COLORING: "COLORING",
+    CYCLES: "CYCLES",
+    TREES: "TREES",
     COMPONENTS: "COMPONENTS",
-    COMPLETE_GRAPH: "COMPLETE_GRAPH",
 }
 
 export class Graph {
@@ -156,11 +159,14 @@ export class Graph {
 
     showGraphInfo() {
         var contentsToShow1 = "";
-        if (this.hasProperty(PropertyType.GROUPS) || this.hasProperty(PropertyType.COMPLETE_GRAPH)) {
+        if (this.hasProperty(PropertyType.GROUPS) || this.hasProperty(PropertyType.COMPLETE_GRAPH) || this.hasProperty(PropertyType.TRIVIAL)) {
             contentsToShow1 += GraphProperties.sectionHeader("Primeiros conceitos");
         }
         if (this.hasProperty(PropertyType.GROUPS)) {
             contentsToShow1 += GraphProperties.showGroups(this.graphVertices, this.graphEdges);
+        }
+        if (this.hasProperty(PropertyType.TRIVIAL)) {
+            contentsToShow1 += GraphProperties.showTrivialGraph();
         }
         if (this.hasProperty(PropertyType.COMPLETE_GRAPH)) {
             contentsToShow1 += GraphProperties.showCompleteGraph();
@@ -189,32 +195,54 @@ export class Graph {
         var contentsToShow3 = "";
         if (this.hasProperty(PropertyType.BIPARTITE) || this.hasProperty(PropertyType.CHROMATIC_COLOR) || this.hasProperty(PropertyType.COLORING)) {
             contentsToShow3 += GraphProperties.sectionHeader("Coloração/multipartição");
-        }
-
-        if (this.hasProperty(PropertyType.BIPARTITE)) {
-            contentsToShow3 += GraphProperties.showBiparte(window.graph.chromaticNumber == 2);
-        }
-        if (this.hasProperty(PropertyType.CHROMATIC_COLOR) && this.graphVertices.findIndex((it) => it.color != null) == -1) {
-            contentsToShow3 += GraphProperties.showChromaticNumber(window.graph.chromaticNumber);
-        }
-        if (this.hasProperty(PropertyType.COLORING)) {
-            GraphProperties.greedyColoring(this.graphVertices);
-            contentsToShow3 += GraphProperties.showBiparte(window.graph.chromaticNumber == 2);
-            contentsToShow3 += GraphProperties.showChromaticNumber(window.graph.chromaticNumber);
         } else {
             GraphProperties.resetColoring(this.graphVertices);
         }
+
+        if (this.hasProperty(PropertyType.BIPARTITE)) {
+            GraphProperties.greedyColoring(this.graphVertices);
+            contentsToShow3 += GraphProperties.showBiparte(window.graph.chromaticNumber == 2);
+        }
+        if (this.hasProperty(PropertyType.CHROMATIC_COLOR)) {
+            GraphProperties.greedyColoring(this.graphVertices);
+            contentsToShow3 += GraphProperties.showChromaticNumber(window.graph.chromaticNumber);
+        }
+        // if (this.hasProperty(PropertyType.COLORING)) {
+        //     GraphProperties.greedyColoring(this.graphVertices);
+        //     contentsToShow3 += GraphProperties.showBiparte(window.graph.chromaticNumber == 2);
+        //     contentsToShow3 += GraphProperties.showChromaticNumber(window.graph.chromaticNumber);
+        // } else {
+        //     GraphProperties.resetColoring(this.graphVertices);
+        // }
         this.showMathJaxOutput(contentsToShow3, "output-coloring");
 
 
         var contentsToShow4 = "";
+        if (this.hasProperty(PropertyType.CYCLES)) {
+            contentsToShow4 += GraphProperties.sectionHeader("Ciclos");
+        }
+        if (this.hasProperty(PropertyType.CYCLES)) {
+            contentsToShow4 += GraphProperties.showCycles();
+        }
+        this.showMathJaxOutput(contentsToShow4, "output-cycles");
+
+        var contentsToShow5 = "";
+        if (this.hasProperty(PropertyType.TREES)) {
+            contentsToShow5 += GraphProperties.sectionHeader("Árvores");
+        }
+        if (this.hasProperty(PropertyType.TREES)) {
+            contentsToShow5 += GraphProperties.showTrees();
+        }
+        this.showMathJaxOutput(contentsToShow5, "output-trees");
+
+        var contentsToShow6 = "";
         if (this.hasProperty(PropertyType.COMPONENTS)) {
-            contentsToShow4 += GraphProperties.sectionHeader("Conectividade");
+            contentsToShow6 += GraphProperties.sectionHeader("Conectividade");
         }
         if (this.hasProperty(PropertyType.COMPONENTS)) {
-            contentsToShow4 += GraphProperties.checkComponents();
+            contentsToShow6 += GraphProperties.checkComponents();
         }
-        this.showMathJaxOutput(contentsToShow4, "output-conectivity");
+        this.showMathJaxOutput(contentsToShow6, "output-conectivity");
 
 
         // console.log("showGraphInfo final", contentsToShow);

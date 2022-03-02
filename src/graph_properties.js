@@ -174,8 +174,8 @@ export function resetColoring(vertices) {
 }
 
 export function showChromaticNumber(chromaticNumber) {
-    // var l = "\\[\\text{\\chi_{G}\\( Número crômatico é \\(" +
-    var l = "\\[\\text{Número crômatico é } \\chi = " + chromaticNumber + "\\]";
+    // var l = "\\[\\text{Número crômatico é } \\chi = " + chromaticNumber + "\\]";
+    var l = "\\[\\chi = " + chromaticNumber + "\\]";
     return l;
 }
 
@@ -314,5 +314,27 @@ export function showCompleteGraph() {
     } else {
         l += "\\[\\text{Não é um grafo completo.}\\]";
     }
+    return l;
+}
+
+export function showTrivialGraph() {
+    var vertices = window.graph.graphVertices;
+    var isTrivial = vertices.length == 1;
+    if (isTrivial) {
+        return "\\[\\text{É um grafo trivial.}\\]";
+    }
+    return "\\[\\text{Não é um grafo trivial.}\\]"
+}
+
+export function showCycles() {
+    var vertices = window.graph.graphVertices;
+    var edges = window.graph.graphEdges;
+    var l = "";
+    return l;
+}
+export function showTrees() {
+    var vertices = window.graph.graphVertices;
+    var edges = window.graph.graphEdges;
+    var l = "";
     return l;
 }
