@@ -13,7 +13,6 @@ export function importGraphMl(_) {
         const textContent = e.target.result
         var parser = new GraphMLParser();
         parser.parse(textContent, function(err, graphml) {
-            console.log("parser.parse", graphml);
             var graphVertices = mapGraphMlToVertices(graphml);
             var graphEdges = mapGraphMlToEdges(graphml, graphVertices);
             window.graph.importGraph(graphVertices, graphEdges);

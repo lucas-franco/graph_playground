@@ -18,26 +18,21 @@ const INIT_VERTICES = [
 ];
 
 const INIT_EDGES = [
-    { source: 0, target: 1 },
-    { source: 0, target: 2 },
-    { source: 0, target: 3 },
-    { source: 0, target: 4 },
-    { source: 1, target: 2 },
-    { source: 1, target: 3 },
-    { source: 1, target: 4 },
-    { source: 2, target: 3 },
-    { source: 2, target: 4 },
-    { source: 3, target: 4 },
+    { id: 0, source: 0, target: 1 },
+    { id: 1, source: 0, target: 2 },
+    { id: 2, source: 0, target: 3 },
+    { id: 3, source: 0, target: 4 },
+    { id: 4, source: 1, target: 2 },
+    { id: 5, source: 1, target: 3 },
+    { id: 6, source: 1, target: 4 },
+    { id: 7, source: 2, target: 3 },
+    { id: 8, source: 2, target: 4 },
+    { id: 9, source: 3, target: 4 },
 ];
-
-
-export const TestType = {
-    MIN_MAX_DEGREE: "MIN_MAX_DEGREE",
-    REGULAR: "REGULAR",
-}
 
 export const PropertyType = {
     GROUPS: "GROUPS",
+    ADJACENCY_MATRIX: "ADJACENCY_MATRIX",
     TRIVIAL: "TRIVIAL",
     COMPLETE_GRAPH: "COMPLETE_GRAPH",
     MIN_DEGREE: "MIN_DEGREE",
@@ -54,10 +49,14 @@ export const PropertyType = {
 export class Graph {
     graphVertices = INIT_VERTICES;
     graphEdges = INIT_EDGES;
-    currentTest = TestType.MIN_MAX_DEGREE;
     propertiesToShow = [];
-    restartGraph;
+
     chromaticNumber;
+
+    // Methods
+    restartGraph;
+    toggleColors;
+    toggleVertexId;
 
     // utils
     isEdgeOfVertex = (vertex, edge) => {
@@ -79,6 +78,7 @@ export class Graph {
         edges: [],
     })
     mapLinkToEdge = (link) => ({
+        id: link['id'],
         source: link['source'],
         target: link['target'],
     })
@@ -159,11 +159,14 @@ export class Graph {
 
     showGraphInfo() {
         var contentsToShow1 = "";
-        if (this.hasProperty(PropertyType.GROUPS) || this.hasProperty(PropertyType.COMPLETE_GRAPH) || this.hasProperty(PropertyType.TRIVIAL)) {
+        if (this.hasProperty(PropertyType.GROUPS) || this.hasProperty(PropertyType.ADJACENCY_MATRIX) || this.hasProperty(PropertyType.COMPLETE_GRAPH) || this.hasProperty(PropertyType.TRIVIAL)) {
             contentsToShow1 += GraphProperties.sectionHeader("Primeiros conceitos");
         }
         if (this.hasProperty(PropertyType.GROUPS)) {
             contentsToShow1 += GraphProperties.showGroups(this.graphVertices, this.graphEdges);
+        }
+        if (this.hasProperty(PropertyType.ADJACENCY_MATRIX)) {
+            contentsToShow1 += GraphProperties.showAdjacencyMatrix();
         }
         if (this.hasProperty(PropertyType.TRIVIAL)) {
             contentsToShow1 += GraphProperties.showTrivialGraph();

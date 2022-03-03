@@ -5,7 +5,10 @@ const htmlColors = require('html-colors');
 var nodes = [];
 var links = [];
 
-var lastNodeId = nodes.length;
+var showVerticesIds = false;
+
+var lastNodeId = nodes.length - 1;
+var lastEdgeId = links.length - 1;
 var viewWid = document.documentElement.clientWidth;
 var w = viewWid > 1200 ? 900 : 700;
 var h = w == 900 ? 600 : 500;
@@ -29,8 +32,6 @@ var svg = d3.select("#svg-wrap")
 
 
 //array of colors for nodes
-
-
 var colors = d3.schemeCategory10.concat(Please.make_color({
     colors_returned: 90,
     value: 0.7,
@@ -97,7 +98,7 @@ function getColor(value) {
 //interface is defined through several events
 function restart() {
     edges = edges.data(links, function(d) {
-        return "v" + d.source.id + "-v" + d.target.id;
+        return d.id;
     });
     edges.exit().remove();
 
@@ -110,11 +111,24 @@ function restart() {
         })
         .on("contextmenu", removeEdge);
 
-    // ed.append("title").text(function(d) {
-    //     return "v" + d.source.id + "-v" + d.target.id;
-    // });
+    ed.append("title").text(function(d) {
+        return "e" + d.id;
+    });
+
+    ed.append("text")
+        .style("text-anchor", "middle")
+        .attr("y", 5)
+        .attr("class", "vertex-text")
+        .on("mousedown", function() {
+            d3.event.stopPropagation();
+        })
+        .on("contextmenu", removeEdge)
+        .text(function(d) {
+            return "teste";
+        });
 
     edges = ed.merge(edges);
+
 
     //vertices are known by id
     vertices = vertices.data(nodes, function(d) {
@@ -154,6 +168,22 @@ function restart() {
         // console.log("fill2", { d, color: colors[d.color % 10] });
         return getColor(d.color);
     });
+
+    if (showVerticesIds) {
+        vertices.append("text")
+            .style("text-anchor", "middle")
+            .attr("y", 5)
+            .attr("class", "vertex-text")
+            .on("mousedown", beginDragLine)
+            .on("mouseup", endDragLine)
+            .on("contextmenu", removeNode)
+            .text(function(d) {
+                return showVerticesIds ? d.id : null;
+            });
+    } else {
+        vertices.selectAll("text").remove();
+    }
+
 
     force.nodes(nodes);
     // console.log("restart/6,", { links, nodes });
@@ -229,7 +259,6 @@ function hideDragLine() {
 
 function beginDragLine(d) {
     if (window.ctrlKeyIsPressed) {
-        console.log("control key is pressed")
         window.graph.showVertexInfo(d);
     } else {
         window.graph.hideVertexInfo();
@@ -263,7 +292,7 @@ function endDragLine(d) {
             return;
         }
     }
-    var newLink = { source: mousedownNode, target: d };
+    var newLink = { source: mousedownNode, target: d, id: ++lastEdgeId };
     links.push(newLink);
 }
 
@@ -272,7 +301,7 @@ d3.select("#clear")
     .on('click', function() {
         nodes.splice(0);
         links.splice(0);
-        lastNodeId = 0;
+        lastNodeId = -1;
         restart();
     });
 
@@ -331,8 +360,9 @@ function mapVertexToNode(vertex) {
     };
 }
 
-function mapEdgeToLink(edge) {
+function mapEdgeToLink(edge, index) {
     return {
+        id: edge["id"] || index,
         source: edge["source"],
         target: edge["target"],
     }
@@ -349,29 +379,24 @@ function restartGraph() {
     setColor();
 }
 
+function toggleVertexId() {
+    showVerticesIds = !showVerticesIds;
+    restart();
+}
+
 function start() {
-    console.log("colors", { colors });
     if (window.graph.graphVertices != null) {
         var tempVertices = window.graph.graphVertices;
         var tempEdges = window.graph.graphEdges;
-        // if (nodes.length > 0) {
-        //     nodes.splice(0);
-        // }
-        // if (links.length > 0) {
-        //     links.splice(0);
-        // }
-        // lastNodeId = 0;
-        // restart();
 
-        // console.log("start/1", { vertices: tempVertices, edges: tempEdges });
         window.graph.restartGraph = () => restartGraph();
-        // tempVertices.forEach((it, index) => {
+        window.graph.toggleVertexId = () => toggleVertexId();
 
-        // });
         nodes = tempVertices.map((it) => mapVertexToNode(it));
-        links = tempEdges.map((it) => mapEdgeToLink(it));
-        lastNodeId = nodes.map((it) => it.id).reduce((a, b) => Math.max(a, b));;
-        console.log("start", { nodes, links });
+        links = tempEdges.map((it, index) => mapEdgeToLink(it, index));
+        lastNodeId = nodes.map((it) => it.id).reduce((a, b) => Math.max(a, b));
+        lastEdgeId = edges.length - 1;
+        // console.log("start", { nodes, links });
     }
     restart();
 }

@@ -132,7 +132,38 @@ export function showGroups(vertices, edges) {
     }
     e += "\\}\\]";
 
+    e += "\\[\\text{|V| = }" + vertices.length + "\\]";
+    e += "\\[\\text{|E| = }" + edges.length + "\\]";
+
     return v + e;
+}
+
+export function showAdjacencyMatrix() {
+    var vertices = window.graph.graphVertices;
+    var edges = window.graph.graphEdges;
+
+    var l = "";
+    l += "\\[\\text{Matriz de adjacência}\\]"
+    l += "\\[\\begin{pmatrix}";
+    var a = [];
+    for (let i = 0; i < vertices.length; i++) {
+        for (let j = 0; j < vertices.length; j++) {
+            var value;
+            if (i == j) {
+                value = 0
+            } else {
+                value = vertices[i].edges.filter((e) => e.source.id == vertices[j].id || e.target.id == vertices[j].id).length > 0 ? 1 : 0;
+            }
+            var and = j == vertices.length - 1 ? "" : " & ";
+            l += "" + value + and;
+        }
+        l += "\\";
+        l += "\\";
+    }
+
+    l += "\\end{pmatrix}\\]";
+
+    return l;
 }
 
 export function greedyColoring(vertices) {
@@ -326,15 +357,133 @@ export function showTrivialGraph() {
     return "\\[\\text{Não é um grafo trivial.}\\]"
 }
 
+
+function checkCycle() {
+    var vertices = window.graph.graphVertices;
+    var edges = window.graph.graphEdges;
+    if (edges.length == 0) return false;
+
+    //construct adjacency list of graph
+    //vis keeps track of visited node ids
+    var adjList = {},
+        vis = {},
+        parent = {};
+    vertices.forEach(function(v) {
+        v.visited = false;
+        adjList[v.id] = [];
+        vis[v.id] = false;
+    });
+    edges.forEach(function(e) {
+        adjList[e.source.id].push(e.target.id);
+        adjList[e.target.id].push(e.source.id);
+    });
+
+    //perform DFS on vertices
+    var q = [vertices[0].id];
+    //-1 means root
+    parent[vertices[0].id] = -1;
+    var v1, v2;
+
+    while (q.length > 0) {
+        v1 = q.shift();
+        vis[v1] = true;
+        for (let i = 0; i < adjList[v1].length; i++) {
+            v2 = adjList[v1][i];
+            if (vis[v2] && parent[v1] != v2) return true;
+            if (!vis[v2]) {
+                q.push(v2);
+                parent[v2] = v1;
+            }
+        }
+    }
+
+    //check for other components
+    if (q.length == 0) {
+        for (let v in vis) {
+            if (!vis[v]) {
+                q.push(v);
+                parent[v] = -1;
+                break;
+            }
+        }
+    }
+    return false;
+}
+
 export function showCycles() {
     var vertices = window.graph.graphVertices;
     var edges = window.graph.graphEdges;
     var l = "";
+
+    //construct adjacency list of graph
+    //vis keeps track of visited node ids
+    var adjList = {},
+        vis = {},
+        parent = {};
+    vertices.forEach(function(v) {
+        v.visited = false;
+        adjList[v.id] = [];
+        vis[v.id] = false;
+    });
+    edges.forEach(function(e) {
+        adjList[e.source.id].push(e.target.id);
+        adjList[e.target.id].push(e.source.id);
+    });
+
+    //perform DFS on vertices
+    var q = [vertices[0].id];
+    //-1 means root
+    parent[vertices[0].id] = -1;
+    var v1, v2;
+
+    var cycles = 0;
+    while (q.length > 0) {
+        v1 = q.shift();
+        vis[v1] = true;
+        for (let i = 0; i < adjList[v1].length; i++) {
+            v2 = adjList[v1][i];
+            if (vis[v2] && parent[v1] != v2) {
+                cycles += 1;
+            }
+            if (!vis[v2]) {
+                q.push(v2);
+                parent[v2] = v1;
+            }
+        }
+
+        //check for other components
+        if (q.length == 0) {
+            for (let v in vis) {
+                if (!vis[v]) {
+                    q.push(v);
+                    parent[v] = -1;
+                    break;
+                }
+            }
+        }
+    } //while ends here
+    if (cycles == 0) {
+        l += "\\[\\text{O grafo não tem ciclos}\\]";
+    } else {
+        l += "\\[\\text{O grafo tem " +
+            cycles +
+            " ciclos.}\\]";
+    }
+
     return l;
 }
 export function showTrees() {
     var vertices = window.graph.graphVertices;
     var edges = window.graph.graphEdges;
+
     var l = "";
+
+    if (vertices.length == 0) l = "\\[\\text{Não é uma árvore.}\\]";
+    else if (checkCycle()) l = "\\[\\text{Não é uma árvore. Grafo não é acíclico.}\\]";
+    else if (vertices.length == edges.length + 1)
+        l =
+        "\\[\\text{É uma árvore.}\\]";
+    else l = "\\[\\text{É uma floresta.}\\]";
+
     return l;
 }
