@@ -28,10 +28,7 @@
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "targets": {
         "default": {
-            "includeNodeModules": true,
-            "optimize": true,
-            "distDir": "./dist",
-            "sourceMap": false
+            "distDir": "./dist"
         }
     },
     "engines": {
