@@ -1,3 +1,7 @@
+.zoom-fix {
+    zoom: 125%;
+}
+
 body {
     margin: 0;
     font-family: Helvetica, Arial;
