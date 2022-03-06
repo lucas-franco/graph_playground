@@ -263,9 +263,9 @@ export class Graph {
     showGraphInfoThrottle = _.throttle(this.showGraphInfo, 500)
 
     refresh(nodes, links) {
-        var a = nodes.length != this.graphVertices.length;
-        var b = links.length != this.graphEdges.length;
-        var c = this.graphVertices.filter((e) => e.edges == null || e.edges.length == 0).length > 0;
+        // var a = nodes.length != this.graphVertices.length;
+        // var b = links.length != this.graphEdges.length;
+        // var c = this.graphVertices.filter((e) => e.edges == null || e.edges.length == 0).length > 0;
         if (nodes.length != this.graphVertices.length || links.length != this.graphEdges.length || this.graphVertices.filter((e) => e.edges == null).length > 0) {
             this.graphVertices = nodes.map((it) => this.mapNodeToVertex(it));
 
@@ -294,3 +294,5 @@ export class Graph {
     }
 
 }
+
+window.graph = new Graph();

@@ -1,10 +1,6 @@
 import _ from 'underscore';
 import * as FileService from "./file_service";
 import { Graph, PropertyType } from "./graph";
-import * as GraphProperties from "./graph_properties";
-
-
-window.graph = new Graph();
 
 window.ctrlKeyIsPressed = false;
 document.addEventListener('keydown', function(event) {
