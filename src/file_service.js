@@ -63,8 +63,8 @@ function verticesToGraphMl(vertices) {
 function edgesToGraphMl(edges) {
     return edges.map((e) => ({
         "_attributes": {
-            source: e["source"],
-            target: e["target"]
+            source: e["source"]["id"],
+            target: e["target"]["id"]
         }
     }));
 }
