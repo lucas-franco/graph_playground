@@ -11,7 +11,7 @@
     "scripts": {
         "prebuild": "rimraf ./dist",
         "format": "prettier --write src/**/*.{js,json,md}",
-        "build": "parcel build",
+        "build": "parcel build src/index.html",
         "start": "parcel"
     },
     "keywords": [
