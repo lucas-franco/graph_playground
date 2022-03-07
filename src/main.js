@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import * as FileService from "./file_service";
 import { Graph, PropertyType } from "./graph";
+import * as PremadeGraphs from './premade_graphs';
 
 window.ctrlKeyIsPressed = false;
 document.addEventListener('keydown', function(event) {
@@ -86,6 +87,111 @@ document.getElementById('property_components')
     });
 
 
+document.getElementById('graph_none')
+    .addEventListener('change', function(event) {
+        var vertices = [];
+        var edges = [];
+        window.graph.importGraph(vertices, edges);
+    });
+
+document.getElementById('graph_k1')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k1.vertices;
+        var edges = PremadeGraphs.graph_k1.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+
+document.getElementById('graph_k2')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k2.vertices;
+        var edges = PremadeGraphs.graph_k2.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_k3')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k3.vertices;
+        var edges = PremadeGraphs.graph_k3.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_k4')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k4.vertices;
+        var edges = PremadeGraphs.graph_k4.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_k5')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k5.vertices;
+        var edges = PremadeGraphs.graph_k5.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_k6')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k6.vertices;
+        var edges = PremadeGraphs.graph_k6.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_k7')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k7.vertices;
+        var edges = PremadeGraphs.graph_k7.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_k8')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k8.vertices;
+        var edges = PremadeGraphs.graph_k8.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+
+document.getElementById('graph_k2_3')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k2_3.vertices;
+        var edges = PremadeGraphs.graph_k2_3.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_k2_4')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k2_4.vertices;
+        var edges = PremadeGraphs.graph_k2_4.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_k3_3')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k3_3.vertices;
+        var edges = PremadeGraphs.graph_k3_3.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_k3_4')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_k3_4.vertices;
+        var edges = PremadeGraphs.graph_k3_4.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_c3')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_c3.vertices;
+        var edges = PremadeGraphs.graph_c3.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_c4')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_c4.vertices;
+        var edges = PremadeGraphs.graph_c4.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_c5')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_c5.vertices;
+        var edges = PremadeGraphs.graph_c5.edges;
+        window.graph.importGraph(vertices, edges);
+    });
+document.getElementById('graph_c6')
+    .addEventListener('change', function(event) {
+        var vertices = PremadeGraphs.graph_c6.vertices;
+        var edges = PremadeGraphs.graph_c6.edges;
+        window.graph.importGraph(vertices, edges);
+    });
 
 document.getElementById('toggle-vertex-id-input')
     .addEventListener('change', function(event) {

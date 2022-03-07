@@ -1,16 +1,22 @@
 import { GraphMLParser } from 'graphml-js';
 import convert from 'xml-js';
 
-const inputElement = document.getElementById("inputElement")
+const inputElement = document.getElementById("inputElement");
 
-inputElement.onchange = importGraphMl
+inputElement.onchange = importGraphMl;
 
 export function importGraphMl(_) {
-    const file = inputElement.files[0]
+    const file = inputElement.files[0];
+    readGraphMl(file);
+}
+
+function readGraphMl(file) {
     if (!file) return
+    console.log("importGraphMl", file);
     const reader = new FileReader()
     reader.onload = (e) => {
         const textContent = e.target.result
+        console.log("onLoad", { e, textContent });
         var parser = new GraphMLParser();
         parser.parse(textContent, function(err, graphml) {
             var graphVertices = mapGraphMlToVertices(graphml);
@@ -22,8 +28,8 @@ export function importGraphMl(_) {
         const error = e.target.error
         console.error(`Error occured while reading ${file.name}`, error)
     }
-    reader.readAsText(file)
 
+    reader.readAsText(file)
 }
 
 function mapGraphMlToVertices(graphml) {

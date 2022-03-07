@@ -375,7 +375,17 @@ function setColor() {
     });
 }
 
-function restartGraph() {
+function restartGraph(vertices, edges) {
+    nodes = [];
+    links = [];
+    restart();
+
+    window.graph.graphVertices = vertices;
+    window.graph.graphEdges = edges;
+    start();
+}
+
+function toggleColors() {
     setColor();
 }
 
@@ -389,14 +399,17 @@ function start() {
         var tempVertices = window.graph.graphVertices;
         var tempEdges = window.graph.graphEdges;
 
-        window.graph.restartGraph = () => restartGraph();
+        window.graph.restartGraph = (vertices, edges) => restartGraph(vertices, edges);
+        window.graph.toggleColors = () => toggleColors();
         window.graph.toggleVertexId = () => toggleVertexId();
 
         nodes = tempVertices.map((it) => mapVertexToNode(it));
         links = tempEdges.map((it, index) => mapEdgeToLink(it, index));
+
+        // console.log("start", { tempVertices, tempEdges, nodes, links });
+
         lastNodeId = nodes.map((it) => it.id).reduce((a, b) => Math.max(a, b));
         lastEdgeId = edges.length - 1;
-        // console.log("start", { nodes, links });
     }
     restart();
 }

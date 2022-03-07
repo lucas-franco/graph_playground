@@ -195,12 +195,12 @@ export function greedyColoring(vertices) {
     //     graph: window.graph,
     //     colorsResult,
     // });
-    window.graph.restartGraph();
+    window.graph.toggleColors();
 }
 
 export function resetColoring(vertices) {
     window.graph.graphVertices = vertices.map((e) => ({...e, color: null }));
-    window.graph.restartGraph();
+    window.graph.toggleColors();
     window.graph.chromaticNumber = 0;
 }
 

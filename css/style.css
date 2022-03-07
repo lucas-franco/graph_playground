@@ -163,3 +163,7 @@ svg {
 .card-bg-info {
     background-color: #daecf9!important;
 }
+
+.btn-group {
+    width: auto !important;
+}

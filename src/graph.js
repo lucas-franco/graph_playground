@@ -7,14 +7,6 @@ const INIT_VERTICES = [
     { id: 2, },
     { id: 3, },
     { id: 4, },
-    // { id: 6, },
-    // { id: 7, },
-    // { id: 8, },
-    // { id: 9, },
-    // { id: 10, },
-    // { id: 11, },
-    // { id: 12, },
-    // { id: 13, },
 ];
 
 const INIT_EDGES = [
@@ -210,13 +202,6 @@ export class Graph {
             GraphProperties.greedyColoring(this.graphVertices);
             contentsToShow3 += GraphProperties.showChromaticNumber(window.graph.chromaticNumber);
         }
-        // if (this.hasProperty(PropertyType.COLORING)) {
-        //     GraphProperties.greedyColoring(this.graphVertices);
-        //     contentsToShow3 += GraphProperties.showBiparte(window.graph.chromaticNumber == 2);
-        //     contentsToShow3 += GraphProperties.showChromaticNumber(window.graph.chromaticNumber);
-        // } else {
-        //     GraphProperties.resetColoring(this.graphVertices);
-        // }
         this.showMathJaxOutput(contentsToShow3, "output-coloring");
 
 
@@ -263,9 +248,6 @@ export class Graph {
     showGraphInfoThrottle = _.throttle(this.showGraphInfo, 500)
 
     refresh(nodes, links) {
-        // var a = nodes.length != this.graphVertices.length;
-        // var b = links.length != this.graphEdges.length;
-        // var c = this.graphVertices.filter((e) => e.edges == null || e.edges.length == 0).length > 0;
         if (nodes.length != this.graphVertices.length || links.length != this.graphEdges.length || this.graphVertices.filter((e) => e.edges == null).length > 0) {
             this.graphVertices = nodes.map((it) => this.mapNodeToVertex(it));
 
@@ -273,15 +255,8 @@ export class Graph {
             links.map((it) => {
                 this.addEdge(it);
             });
-
-            // if (nodes.length != this.graphVertices.length || links.length != this.graphEdges.length) {
-            //     console.log("refresh/if", { nodes, links, graphEdges: this.graphEdges, graphVertices: this.graphVertices })
-            //     this.graphVertices = vertices;
-            //     this.graphEdges = edges;
-            // }
             this.showGraphInfoThrottle();
         }
-
 
         // console.log("refresh end", { graphEdges: this.graphEdges, graphVertices: this.graphVertices });
     }
@@ -290,7 +265,7 @@ export class Graph {
         // console.log("importGraph", vertices, edges);
         this.graphVertices = vertices;
         this.graphEdges = edges;
-        this.restartGraph();
+        this.restartGraph(vertices, edges);
     }
 
 }

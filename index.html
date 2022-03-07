@@ -24,90 +24,208 @@
 
         <div class="row">
             <div class="col-md-4 col-sm-12">
-                <div class="btn-group">
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                          Informações do grafo
-                    </button>
-                    <div class="dropdown-menu background-color" aria-labelledby="dropdownMenuButton1">
-                        <h6 class="dropdown-header">Primeiros conceitos</h6>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_groups">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Conjuntos
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_adjacency-matrix">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Matriz de adjacência
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_trivial">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Trivial
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_complete-graph">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Grafo completo
-                            </label>
-                        </div>
-                        <h6 class="dropdown-header">Grau</h6>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_min-degree">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Grau mínimo
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_max-degree">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Grau máximo
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_regular-graph">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                K-regular
-                            </label>
-                        </div>
-                        <h6 class="dropdown-header">Coloração/multipartição</h6>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_bipartite">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Bipartido
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_chromatic-color">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Número crômatico
-                            </label>
-                        </div>
+                <div class="row">
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              Informações do grafo
+                        </button>
+                        <div class="dropdown-menu background-color" aria-labelledby="dropdownMenuButton1">
+                            <h6 class="dropdown-header">Primeiros conceitos</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_groups">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Conjuntos
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_adjacency-matrix">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Matriz de adjacência
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_trivial">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Trivial
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_complete-graph">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Grafo completo
+                                </label>
+                            </div>
+                            <h6 class="dropdown-header">Grau</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_min-degree">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Grau mínimo
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_max-degree">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Grau máximo
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_regular-graph">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    K-regular
+                                </label>
+                            </div>
+                            <h6 class="dropdown-header">Coloração/multipartição</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_bipartite">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Bipartido
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_chromatic-color">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Número crômatico
+                                </label>
+                            </div>
 
-                        <!-- <h6 class="dropdown-header">Ciclos</h6>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_cycles">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Número de ciclos
-                            </label>
-                        </div> -->
-                        <h6 class="dropdown-header">Árvores</h6>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_trees">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Árvores
-                            </label>
-                        </div>
+                            <!-- <h6 class="dropdown-header">Ciclos</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_cycles">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Número de ciclos
+                                </label>
+                            </div> -->
+                            <h6 class="dropdown-header">Árvores</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_trees">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Árvores
+                                </label>
+                            </div>
 
-                        <h6 class="dropdown-header">Conectividade</h6>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="property_components">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Componentes
+                            <h6 class="dropdown-header">Conectividade</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="property_components">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Componentes
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                            Grafos nomeados
+                      </button>
+                        <div class="dropdown-menu background-color" aria-labelledby="dropdownMenuButton2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_none">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                Nenhum
                             </label>
+                            </div>
+                            <h6 class="dropdown-header">Completos</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k1">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K1
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k2">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K2
+                            </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k3">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K3
+                            </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k4">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K4
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k5">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K5
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k6">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K6
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k7">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K7
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k8">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K8
+                            </label>
+                            </div>
+                            <h6 class="dropdown-header">Bipartidos</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k2_3">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K2,3
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k2_4">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K2,4
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k3_3">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K3,3
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_k3_4">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                K3,4
+                            </label>
+                            </div>
+                            <h6 class="dropdown-header">Ciclos</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_c3">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                C3
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_c4">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                C4
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_c5">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                C5
+                            </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="" id="graph_c6">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                C6
+                            </label>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
